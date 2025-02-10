@@ -1,9 +1,11 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
 import { Bounce, ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
+      <Outlet />
       <ToastContainer
         position="top-right"
         autoClose={5000}
