@@ -45,3 +45,4 @@ CREATE TABLE IF NOT EXISTS Money (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(ID)
 );
+INSERT INTO role (id,label) VALUES (1, 'user'), (2, 'administrator');
