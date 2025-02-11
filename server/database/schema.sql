@@ -1,21 +1,47 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+
+CREATE TABLE IF NOT EXISTS Role (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    label VARCHAR(50) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE IF NOT EXISTS User (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    role_id INTEGER NOT NULL DEFAULT 1,
+    FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
+CREATE TABLE IF NOT EXISTS Collection (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    label VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
+CREATE TABLE IF NOT EXISTS Money (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    label VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL,
+    year INT NOT NULL,
+    value DECIMAL(10,2) NOT NULL,
+    meterial VARCHAR(255),
+    diameter DECIMAL(5,2),
+    weight DECIMAL(5,2),
+    condition VARCHAR(255),
+    description TEXT,
+    picture VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    collection_id INT NOT NULL,
+    FOREIGN KEY (collection_id) REFERENCES Collection(ID),
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(ID)
+);
