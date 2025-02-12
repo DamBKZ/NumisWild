@@ -68,3 +68,9 @@ export const checkingToken: RequestHandler = (req, res) => {
   res.status(200).json({ authentified: true });
   return;
 };
+
+export const logout: RequestHandler = (req, res) => {
+  res.clearCookie("auth_token").json({
+    message: "logout",
+  });
+};

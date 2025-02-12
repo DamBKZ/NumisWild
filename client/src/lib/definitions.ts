@@ -13,10 +13,20 @@ type FormValues = {
   confirmed_password: string;
 };
 
-type ProfileFormValues = {
+type UpdateFormValues = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  new_password?: string;
+};
+
+type ProfileFormData = {
   firstname: string;
   lastname: string;
   email: string;
-  hash_password: string;
-  confirmed_password: string;
+};
+
+type PasswordFormData = {
+  password: string;
+  confirmPassword: string;
 };
