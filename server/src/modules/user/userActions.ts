@@ -137,9 +137,7 @@ const modifiedData: RequestHandler = async (req, res, next) => {
 
 const readRoleFromToken: RequestHandler = async (req, res, next) => {
   try {
-    const tokenFromCookies = (await jwt.decode(
-      req.cookies.auth_token,
-    )) as PayloadType;
+    const tokenFromCookies = jwt.decode(req.cookies.auth_token) as PayloadType;
 
     const email: string = tokenFromCookies?.email;
 

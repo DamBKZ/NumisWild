@@ -3,8 +3,10 @@ import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/LoginPage";
+import AdminPage from "./pages/ProfileAdminPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import Register from "./pages/RegisterPage";
+import UsersListPage from "./pages/UsersListPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,20 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />,
+    loader: () =>
+      fetch(`${import.meta.env.VITE_API_URL}/auth/admin`, {
+        credentials: "include",
+      }),
+    children: [
+      {
+        path: "/admin/utilisateurs",
+        element: <UsersListPage />,
       },
     ],
   },

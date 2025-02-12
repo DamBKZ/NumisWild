@@ -16,6 +16,9 @@ class UserRepository {
   }
 
   async read(id: number) {
+    if (!id || Number.isNaN(id)) {
+      throw new Error("ID utilisateur invalide");
+    }
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE id = ?",
       [id],
