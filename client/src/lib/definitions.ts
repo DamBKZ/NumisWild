@@ -30,3 +30,25 @@ type PasswordFormData = {
   password: string;
   confirmPassword: string;
 };
+
+type UserListType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  hash_password: string;
+  role_id: number;
+  created_at: Date;
+  updated_at: Date;
+  label: string;
+};
+
+type UserProps = {
+  user: UserListType;
+  onDelete: (id: number) => void;
+};
+
+type AdminType = {
+  id: number;
+  isAdmin: boolean;
+};

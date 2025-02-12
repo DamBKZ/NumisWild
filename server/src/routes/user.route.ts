@@ -22,6 +22,8 @@ router.put(
   userActions.edit,
 );
 
+router.get("/api/user/role", userActions.readRoleFromToken);
+
 router.delete("/api/user/:id", userActions.destroy);
 
 export default router;
