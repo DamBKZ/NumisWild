@@ -1,14 +1,18 @@
 type UserType = {
   id: number;
-  content: string;
-  firstname: string;
-  lastname: string;
-};
-
-type FormValues = {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
-  confirmed_password: string;
+  created_at: number;
+  updated_at: number;
+  role_id: number;
+};
+
+type NewUserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
 };
