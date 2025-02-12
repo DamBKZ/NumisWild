@@ -22,7 +22,7 @@ export const getUserByEmail: RequestHandler = async (
       return;
     }
 
-    req.body.passwordFromDB = user.password;
+    req.body.dbpassword = user.hash_password;
 
     next();
   } catch (e) {

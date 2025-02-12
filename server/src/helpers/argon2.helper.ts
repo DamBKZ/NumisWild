@@ -1,4 +1,4 @@
-import argon from "argon2";
+import argon2 from "argon2";
 
 const hashingOptions = {
   memoryCost: 19 * 2 ** 10 /* 19 Mio en kio (19 * 1024 kio) */,
@@ -6,13 +6,17 @@ const hashingOptions = {
   parallelism: 1,
 };
 
-export const argonHash = async (password: string) => {
-  return (await argon.hash(password, hashingOptions)) as string;
+export const hashPasswordHelper = async (hash_password: string) => {
+  return await argon2.hash(hash_password, hashingOptions);
 };
 
-export const argonVerifier = async (
-  hashedPassword: string,
-  password: string,
+export const hashModifiedPasswordHelper = async (new_password: string) => {
+  return await argon2.hash(new_password, hashingOptions);
+};
+
+export const verifyPasswordHelper = async (
+  dbpassword: string,
+  hash_password: string,
 ) => {
-  return await argon.verify(hashedPassword, password);
+  return await argon2.verify(dbpassword, hash_password);
 };

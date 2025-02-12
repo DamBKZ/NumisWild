@@ -25,7 +25,7 @@ export default function Register() {
         lastname: rest.lastname.toLowerCase(),
         firstname: rest.firstname.toLowerCase(),
         email: rest.email.toLowerCase(),
-        password: rest.password,
+        hash_password: rest.hash_password,
       };
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
         method: "POST",
@@ -161,7 +161,7 @@ export default function Register() {
             <section>
               <label
                 className="block text-sm font-medium text-gray-700"
-                htmlFor="password"
+                htmlFor="hash_password"
               >
                 Mot de passe
               </label>
@@ -171,14 +171,14 @@ export default function Register() {
                 </section>
                 <input
                   className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  id="password"
+                  id="hash_password"
                   type="password"
                   aria-label="Saisissez votre mot de passe"
                   placeholder="Saisissez votre mot de passe"
                   minLength={minPassword}
                   maxLength={maxPassword}
                   autoComplete="current-password"
-                  {...register("password", {
+                  {...register("hash_password", {
                     required: "champ obligatoire",
                     pattern: {
                       value:
@@ -190,7 +190,7 @@ export default function Register() {
                 />
               </section>
               <p className="mt-2 text-sm text-red-600">
-                {errors.password?.message}
+                {errors.hash_password?.message}
               </p>
             </section>
             <section>
@@ -221,7 +221,7 @@ export default function Register() {
                         "Le mot de passe doit contenir au minimum 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial",
                     },
                     validate: (value) =>
-                      value === watch("password") ||
+                      value === watch("hash_password") ||
                       "Les mots de passe ne correspondent pas",
                   })}
                 />

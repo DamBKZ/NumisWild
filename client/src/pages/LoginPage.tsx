@@ -15,11 +15,11 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const onSubmitLogin = async (data: FieldValues) => {
     try {
-      const { email, password } = data;
+      const { email, hash_password } = data;
 
       const loginData = {
         email: email.toLowerCase(),
-        password,
+        hash_password,
       };
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
         method: "POST",
@@ -98,7 +98,7 @@ export default function LoginForm() {
 
             <section>
               <label
-                htmlFor="password"
+                htmlFor="hash_password"
                 className="block text-sm font-medium text-gray-700"
               >
                 Mot de passe
@@ -108,13 +108,13 @@ export default function LoginForm() {
                   <Lock className="h-5 w-5 text-gray-400" />
                 </section>
                 <input
-                  id="password"
+                  id="hash_password"
                   type="password"
                   aria-label="Saisissez votre mot de passe"
                   placeholder="Saisissez votre mot de passe"
                   className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   autoComplete="current-password"
-                  {...register("password", {
+                  {...register("hash_password", {
                     required: "Le mot de passe est requis",
                     pattern: {
                       value:
@@ -125,11 +125,9 @@ export default function LoginForm() {
                   })}
                 />
               </section>
-              {errors.password && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.hash_password?.message?.toString()}
-                </p>
-              )}
+              <p className="mt-2 text-sm text-red-600">
+                {errors.hash_password?.message?.toString()}
+              </p>
             </section>
 
             <section>

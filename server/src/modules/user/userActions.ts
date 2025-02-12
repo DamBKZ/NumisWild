@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
-import Joi, { number } from "joi";
-import { decodeToken } from "../../helpers/jwt.helper";
+import Joi from "joi";
+import jwt from "jsonwebtoken";
 import userRepository from "./userRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -28,12 +28,12 @@ const read: RequestHandler = async (req, res, next) => {
 
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const user: NewUserType = {
+    const user: UpdatedUserType = {
       id: Number.parseInt(req.params.id),
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: req.body.new_password,
+      hash_password: req.body.new_password,
     };
 
     const affectedRows = await userRepository.update(user);
@@ -50,13 +50,6 @@ const edit: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const user = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: req.body.password,
-    };
-
     const insertId = await userRepository.create(req.body);
 
     res.status(201).json({ insertId });
@@ -75,13 +68,13 @@ const validateData: RequestHandler = async (req, res, next) => {
       .max(50)
       .required()
       .pattern(/^[A-Za-zÀ-ÿ\s-]+$/),
-    password: Joi.string()
+    email: Joi.string().max(155).required(),
+    hash_password: Joi.string()
       .max(255)
       .required()
       .pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
       ),
-    email: Joi.string().max(155).required(),
   });
 
   const { error } = dataSchema.validate(req.body, { abortEarly: false });
@@ -126,19 +119,42 @@ const modifiedData: RequestHandler = async (req, res, next) => {
       .max(50)
       .required()
       .pattern(/^[A-Za-zÀ-ÿ\s-]+$/),
+    email: Joi.string().max(155).required(),
     new_password: Joi.string()
       .max(255)
       .required()
       .pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
       ),
-    email: Joi.string().max(155).required(),
   });
   const { error } = dataSchema.validate(req.body, { abortEarly: false });
   if (error == null) {
     next();
   } else {
     res.status(400).json({ validationErrors: error.details });
+  }
+};
+
+const readRoleFromToken: RequestHandler = async (req, res, next) => {
+  try {
+    const tokenFromCookies = (await jwt.decode(
+      req.cookies.auth_token,
+    )) as PayloadType;
+
+    const email: string = tokenFromCookies?.email;
+
+    const roleId = await userRepository.readRoleByEmail(email);
+
+    if (roleId !== 1) {
+      res.json({
+        isAdmin: false,
+        message: "Accès interdit. Tu n'es pas un admin",
+      });
+    }
+
+    res.json({ isAdmin: true, message: "bienvenue admin" });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -151,4 +167,5 @@ export default {
   modifiedData,
   checkEmail,
   destroy,
+  readRoleFromToken,
 };

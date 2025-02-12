@@ -3,10 +3,10 @@ import App from "./App";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
+import HomePage from "./pages/HomePage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     children: [
       {
@@ -20,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "*",
         element: <ErrorPage />,
+      },
+      {
+        path: "/",
+        element: <HomePage />,
       },
     ],
   },
