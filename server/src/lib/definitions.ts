@@ -37,3 +37,40 @@ type PayloadType = {
   iat: number;
   exp: number;
 };
+
+type MoneyType = {
+  id: number;
+  label: string;
+  country: string;
+  year: number;
+  value: number;
+  material: string | null;
+  diameter: number | null;
+  weight: number | null;
+  money_condition: string;
+  description: string | null;
+  picture: string | null;
+  collection_id: number;
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+};
+
+type NewMoneyType = {
+  label: string;
+  country: string;
+  year: number;
+  value: number;
+  material: string | null;
+  diameter: number | null;
+  weight: number | null;
+  money_condition: string;
+  description: string | null;
+  picture: string | null;
+  collection_id: number;
+  user_id: number;
+};
+
+type UpdatedMoneyType = NewMoneyType & {
+  id: number;
+};
