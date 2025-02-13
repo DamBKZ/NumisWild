@@ -52,3 +52,54 @@ type AdminType = {
   id: number;
   isAdmin: boolean;
 };
+
+type Coin = {
+  id: string;
+  user_id: string;
+  label: string;
+  country: string;
+  year: number;
+  value: number;
+  material: string;
+  diameter: number;
+  weight: number;
+  money_condition: string;
+  description: string;
+  picture: string;
+  is_banknote: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+type Collection = {
+  id: string;
+  user_id: string;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+};
+
+type CollectionItem = {
+  collection_id: string;
+  coin_id: string;
+  added_at: string;
+};
+
+type CoinFormData = {
+  name: string;
+  country: string;
+  year: number;
+  value: number;
+  material?: string;
+  condition: string;
+  diameter?: number | null;
+  weight?: number | null;
+  image_url?: string;
+  description?: string;
+  is_banknote?: boolean;
+};
+
+type CoinListProps = {
+  searchQuery: string;
+};
