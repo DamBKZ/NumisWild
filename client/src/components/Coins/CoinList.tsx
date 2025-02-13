@@ -1,12 +1,14 @@
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import EditCoinForm from "./EditCoinForm";
 
 export default function CoinList() {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [editingCoin, setEditingCoin] = useState<Coin | null>(null);
 
   const fetchCoins = useCallback(async () => {
     try {
@@ -66,6 +68,34 @@ export default function CoinList() {
     });
   }, [coins, searchQuery]);
 
+  const handleEdit = (coin: Coin) => {
+    setEditingCoin(coin);
+  };
+
+  const handleSaveEdit = async (updatedCoin: Coin) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/money/${updatedCoin.id}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedCoin),
+        },
+      );
+      if (!response.ok) throw new Error("Erreur lors de la mise à jour");
+      setCoins(
+        coins.map((coin) => (coin.id === updatedCoin.id ? updatedCoin : coin)),
+      );
+      toast.success("Pièce mise à jour avec succès !");
+    } catch (err) {
+      toast.error("Une erreur est survenue lors de la mise à jour");
+    }
+    setEditingCoin(null);
+  };
+
   useEffect(() => {
     fetchCoins();
   }, [fetchCoins]);
@@ -121,9 +151,7 @@ export default function CoinList() {
               <section className="mt-4 flex justify-end space-x-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    /* TODO: Implémenter l'édition */
-                  }}
+                  onClick={() => handleEdit(coin)}
                   className="p-1 text-gray-400 hover:text-gray-500"
                 >
                   <Edit className="h-5 w-5" />
@@ -140,6 +168,14 @@ export default function CoinList() {
           </section>
         ))}
       </section>
+
+      {editingCoin && (
+        <EditCoinForm
+          coin={editingCoin}
+          onSave={handleSaveEdit}
+          onClose={() => setEditingCoin(null)}
+        />
+      )}
     </section>
   );
 }
