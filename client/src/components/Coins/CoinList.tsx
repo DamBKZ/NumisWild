@@ -70,29 +70,27 @@ export default function CoinList() {
     fetchCoins();
   }, [fetchCoins]);
 
-  if (loading) return <div>Chargement...</div>;
-  if (error) return <div className="text-red-600">{error}</div>;
+  if (loading) return <section>Chargement...</section>;
+  if (error) return <section className="text-red-600">{error}</section>;
 
   return (
-    <div>
-      {/* Barre de recherche */}
-      <div className="relative mb-4">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <section>
+      <section className="relative mb-4">
+        <section className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Search className="h-5 w-5 text-gray-400" />
-        </div>
+        </section>
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Mise à jour de l'état
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           placeholder="Rechercher une pièce ou un billet..."
         />
-      </div>
+      </section>
 
-      {/* Liste des pièces */}
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredCoins.map((coin) => (
-          <div
+          <section
             key={coin.id}
             className="bg-white overflow-hidden shadow rounded-lg"
           >
@@ -102,25 +100,25 @@ export default function CoinList() {
               alt={coin.label}
             />
 
-            <div className="px-4 py-4">
+            <section className="px-4 py-4">
               <h3 className="text-lg font-medium text-gray-900">
                 {coin.label}
               </h3>
               <p className="mt-1 text-sm text-gray-500">
                 {coin.country}, {coin.year}
               </p>
-              <div className="mt-4 flex justify-between items-center">
+              <section className="mt-4 flex justify-between items-center">
                 <span className="text-sm font-medium text-indigo-600">
                   Valeur: {coin.value}€
                 </span>
                 <span className="text-sm text-gray-500">
                   État: {coin.money_condition}
                 </span>
-              </div>
+              </section>
               {coin.description && (
                 <p className="mt-2 text-sm text-gray-500">{coin.description}</p>
               )}
-              <div className="mt-4 flex justify-end space-x-2">
+              <section className="mt-4 flex justify-end space-x-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -137,11 +135,11 @@ export default function CoinList() {
                 >
                   <Trash2 className="h-5 w-5" />
                 </button>
-              </div>
-            </div>
-          </div>
+              </section>
+            </section>
+          </section>
         ))}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

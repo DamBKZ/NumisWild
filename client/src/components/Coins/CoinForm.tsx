@@ -55,13 +55,13 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {error && (
-        <div className="rounded-md bg-red-50 p-4">
-          <div className="text-sm text-red-700">{error}</div>
-        </div>
+        <section className="rounded-md bg-red-50 p-4">
+          <section className="text-sm text-red-700">{error}</section>
+        </section>
       )}
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div>
+      <section className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <section>
           <label
             htmlFor="name"
             className="block text-sm font-medium text-gray-700"
@@ -75,9 +75,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
           {errors.name && (
             <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
           )}
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="country"
             className="block text-sm font-medium text-gray-700"
@@ -93,9 +93,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
               {errors.country.message}
             </p>
           )}
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="year"
             className="block text-sm font-medium text-gray-700"
@@ -113,9 +113,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
           {errors.year && (
             <p className="mt-1 text-sm text-red-600">{errors.year.message}</p>
           )}
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="value"
             className="block text-sm font-medium text-gray-700"
@@ -134,9 +134,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
           {errors.value && (
             <p className="mt-1 text-sm text-red-600">{errors.value.message}</p>
           )}
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="material"
             className="block text-sm font-medium text-gray-700"
@@ -147,9 +147,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             {...register("material")}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="condition"
             className="block text-sm font-medium text-gray-700"
@@ -173,9 +173,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
               {errors.condition.message}
             </p>
           )}
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="diameter"
             className="block text-sm font-medium text-gray-700"
@@ -188,9 +188,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             {...register("diameter")}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-        </div>
+        </section>
 
-        <div>
+        <section>
           <label
             htmlFor="weight"
             className="block text-sm font-medium text-gray-700"
@@ -203,9 +203,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             {...register("weight")}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-        </div>
+        </section>
 
-        <div className="sm:col-span-2">
+        <section className="sm:col-span-2">
           <label
             htmlFor="image_url"
             className="block text-sm font-medium text-gray-700"
@@ -217,9 +217,9 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             {...register("image_url")}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-        </div>
+        </section>
 
-        <div className="sm:col-span-2">
+        <section className="sm:col-span-2">
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700"
@@ -231,10 +231,10 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             rows={3}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-        </div>
+        </section>
 
-        <div className="sm:col-span-2">
-          <div className="flex items-center">
+        <section className="sm:col-span-2">
+          <section className="flex items-center">
             <input
               type="checkbox"
               {...register("is_banknote")}
@@ -246,11 +246,11 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             >
               C'est un billet
             </label>
-          </div>
-        </div>
-      </div>
+          </section>
+        </section>
+      </section>
 
-      <div className="flex justify-end">
+      <section className="flex justify-end">
         <button
           type="submit"
           disabled={loading}
@@ -258,7 +258,7 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
         >
           {loading ? <Loader className="animate-spin h-5 w-5" /> : "Ajouter"}
         </button>
-      </div>
+      </section>
     </form>
   );
 }
