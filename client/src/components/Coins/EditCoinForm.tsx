@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface EditCoinFormProps {
-  coin: Coin | null;
-  onSave: (updatedCoin: Coin) => void;
-  onClose: () => void;
-}
-
-const EditCoinForm: React.FC<EditCoinFormProps> = ({
-  coin,
-  onSave,
-  onClose,
-}) => {
+const EditCoinForm = ({ coin, onSave, onClose }: EditCoinFormProps) => {
   const [formData, setFormData] = useState<Coin | null>(coin);
 
   useEffect(() => {

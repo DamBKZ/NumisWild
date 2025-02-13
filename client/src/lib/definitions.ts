@@ -103,3 +103,9 @@ type CoinFormData = {
 type CoinListProps = {
   searchQuery: string;
 };
+
+type EditCoinFormProps = {
+  coin: Coin | null;
+  onSave: (updatedCoin: Coin) => void;
+  onClose: () => void;
+};
