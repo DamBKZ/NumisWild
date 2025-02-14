@@ -87,7 +87,7 @@ type CollectionItem = {
 };
 
 type CoinFormData = {
-  name: string;
+  label: string;
   country: string;
   year: number;
   value: number;

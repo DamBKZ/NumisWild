@@ -66,11 +66,11 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             Nom
           </label>
           <input
-            {...register("name", { required: "Nom requis" })}
+            {...register("label", { required: "Nom requis" })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+          {errors.label && (
+            <p className="mt-1 text-sm text-red-600">{errors.label.message}</p>
           )}
         </section>
 
@@ -117,7 +117,7 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
             htmlFor="value"
             className="block text-sm font-medium text-gray-700"
           >
-            Valeur
+            Valeur (en €)
           </label>
           <input
             type="number"

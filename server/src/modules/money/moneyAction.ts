@@ -67,8 +67,8 @@ const add: RequestHandler = async (req, res, next) => {
       money_condition: req.body.money_condition,
       description: req.body.description,
       picture: req.body.picture,
-      collection_id: req.body.collection_id,
-      user_id: req.body.user_id,
+      collection_id: 1,
+      user_id: 3,
     };
 
     const insertId = await moneyRepository.create(money);
