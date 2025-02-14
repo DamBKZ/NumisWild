@@ -1,5 +1,8 @@
 import express from "express";
-import { hashPassword } from "../middlewares/argon2.middleware";
+import {
+  hashModifiedPassword,
+  hashPassword,
+} from "../middlewares/argon2.middleware";
 import userActions from "../modules/user/userActions";
 
 const router = express.Router();
@@ -14,16 +17,24 @@ router.post(
   userActions.add,
 );
 
-router.get("/api/user/:id", userActions.read);
+router.get("/user/:id", userActions.read);
 router.put(
-  "/api/user/:id",
+  "/user/:id",
   userActions.modifiedData,
   hashPassword,
   userActions.edit,
 );
 
-router.get("/api/user/role", userActions.readRoleFromToken);
+router.get("/role", userActions.readRoleFromToken);
 
-router.delete("/api/user/:id", userActions.destroy);
+router.delete("/user/:id", userActions.destroy);
+
+router.get("/me", userActions.getCurrentUser);
+router.put(
+  "/me",
+  userActions.modifiedData,
+  hashModifiedPassword,
+  userActions.edit,
+);
 
 export default router;

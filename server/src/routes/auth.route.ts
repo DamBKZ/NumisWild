@@ -10,9 +10,11 @@ import {
 } from "../modules/auth/authActions";
 
 const router = express.Router();
+router.post("/logout", logout);
 router.post("/api/auth", getUserByEmail, comparePassword, login);
-router.get("/logout", logout);
+
 router.use(verifyToken);
+
 router.get("/admin", readRoleWithToken);
 router.get("/authentified", checkingToken);
 

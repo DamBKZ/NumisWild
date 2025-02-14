@@ -47,19 +47,20 @@ export const verifyToken: RequestHandler = async (req, res, next) => {
 
 export const readRoleWithToken: RequestHandler = async (req, res, next) => {
   try {
-    const tokenFromCookies = (await jwt.decode(
+    const tokenFromCookies = (await jwt.verify(
       req.cookies.auth_token,
+      process.env.APP_SECRET as string,
     )) as PayloadType;
 
     const email: string = tokenFromCookies?.email;
 
     const roleId = await userRepository.readRoleByEmail(email);
 
-    if (roleId !== 1) {
+    if (roleId !== 2) {
       res.json({ isAdmin: false, message: "tu n'es pas un admin" });
     }
 
-    res.json({ isAdmin: true, message: "bienvenu admin" });
+    res.json({ isAdmin: true, message: "bienvenue admin" });
   } catch (err) {
     next(err);
   }
@@ -70,7 +71,11 @@ export const checkingToken: RequestHandler = (req, res) => {
 };
 
 export const logout: RequestHandler = (req, res) => {
-  res.clearCookie("auth_token").json({
-    message: "logout",
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict",
+    path: "/",
   });
+  res.status(200).json({ message: "Déconnexion réussie" });
 };

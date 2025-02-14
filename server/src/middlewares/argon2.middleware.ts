@@ -22,14 +22,16 @@ export const hashPassword: RequestHandler = async (req, res, next) => {
 export const hashModifiedPassword: RequestHandler = async (req, res, next) => {
   const { new_password } = req.body;
 
-  try {
-    const newPassword: string = await hashModifiedPasswordHelper(new_password);
-    if (newPassword) {
-      req.body.new_password = newPassword;
+  if (new_password) {
+    try {
+      const hashedPassword: string =
+        await hashModifiedPasswordHelper(new_password);
+
+      req.body.new_password = hashedPassword;
       next();
-    }
-  } catch (err) {
-    res.status(500);
+    } catch (err) {}
+  } else {
+    next();
   }
 };
 
