@@ -1,10 +1,11 @@
 import { Coins, Loader, Lock, Mail, User } from "lucide-react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Register() {
+  const navigate = useNavigate();
   const minPassword: number = 8;
   const maxPassword: number = 255;
 
@@ -37,6 +38,7 @@ export default function Register() {
       await response.json();
       reset();
       toast.success("Demande envoyée à l'administrateur");
+      navigate("/");
     } catch (error) {
       toast.error("Erreur lors de l'envoi...");
     }
