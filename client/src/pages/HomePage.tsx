@@ -8,21 +8,21 @@ export default function Home() {
   const [showAddForm, setShowAddForm] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <section className="min-h-screen bg-gray-50">
       <Navbar />
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-5 sm:px-6">
-          <div className="flex justify-between items-center">
-            <div>
+        <section className="px-4 py-5 sm:px-6">
+          <section className="flex justify-between items-center">
+            <section>
               <h1 className="text-3xl font-bold text-gray-900">
                 Ma Collection
               </h1>
               <p className="mt-1 text-sm text-gray-500">
                 Gérez votre collection de monnaies et billets
               </p>
-            </div>
-            <div className="flex space-x-2">
+            </section>
+            <section className="flex space-x-2">
               <button
                 type="button"
                 onClick={() => setShowAddForm(true)}
@@ -31,17 +31,17 @@ export default function Home() {
                 <Plus className="h-5 w-5 mr-2" />
                 Ajouter
               </button>
-            </div>
-          </div>
+            </section>
+          </section>
 
-          <div className="mt-8">
+          <section className="mt-8">
             <CoinList />
-          </div>
+          </section>
 
           {showAddForm && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50">
-              <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl">
-                <div className="flex justify-between items-center mb-4">
+            <section className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center p-4 z-50">
+              <section className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl">
+                <section className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-semibold">
                     Ajouter une pièce/billet
                   </h2>
@@ -52,13 +52,13 @@ export default function Home() {
                   >
                     <span className="sr-only">Fermer</span>×
                   </button>
-                </div>
+                </section>
                 <CoinForm onSuccess={() => setShowAddForm(false)} />
-              </div>
-            </div>
+              </section>
+            </section>
           )}
-        </div>
+        </section>
       </main>
-    </div>
+    </section>
   );
 }

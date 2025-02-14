@@ -9,13 +9,10 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUserRole = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/user/role`,
-          {
-            method: "GET",
-            credentials: "include",
-          },
-        );
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/role`, {
+          method: "GET",
+          credentials: "include",
+        });
 
         if (!response.ok)
           throw new Error("Erreur lors de la récupération du rôle");
@@ -35,13 +32,13 @@ export default function Navbar() {
   }, []);
   const handleLogout = async () => {
     try {
-      const response = await fetch("/logout", {
-        method: "GET",
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+        method: "POST",
         credentials: "include",
       });
 
       if (response.ok) {
-        navigate("/login");
+        navigate("/");
       } else {
         console.error("Erreur lors de la déconnexion");
       }
@@ -64,7 +61,7 @@ export default function Navbar() {
           </section>
           <section className="flex items-center space-x-6">
             <Link
-              to="/"
+              to="/homepage"
               className="flex items-center text-white hover:text-gray-200"
             >
               <Coins className="h-5 w-5 mr-2" />

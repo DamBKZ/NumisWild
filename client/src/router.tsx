@@ -6,14 +6,13 @@ import Login from "./pages/LoginPage";
 import AdminPage from "./pages/ProfileAdminPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import Register from "./pages/RegisterPage";
-import UsersListPage from "./pages/UsersListPage";
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/login",
+        path: "/",
         element: <Login />,
       },
       {
@@ -25,7 +24,7 @@ export const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
-        path: "/",
+        path: "/homepage",
         element: <HomePage />,
       },
       {
@@ -38,14 +37,8 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPage />,
     loader: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/auth/admin`, {
+      fetch(`${import.meta.env.VITE_API_URL}/admin`, {
         credentials: "include",
       }),
-    children: [
-      {
-        path: "/admin/utilisateurs",
-        element: <UsersListPage />,
-      },
-    ],
   },
 ]);

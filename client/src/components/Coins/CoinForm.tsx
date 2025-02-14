@@ -19,27 +19,24 @@ export default function CoinForm({ onSuccess }: { onSuccess?: () => void }) {
     setError(null);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/money`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...data,
-            value: Number.parseFloat(data.value.toString()),
-            year: Number.parseInt(data.year.toString()),
-            diameter: data.diameter
-              ? Number.parseFloat(data.diameter.toString())
-              : null,
-            weight: data.weight
-              ? Number.parseFloat(data.weight.toString())
-              : null,
-          }),
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/money`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          ...data,
+          value: Number.parseFloat(data.value.toString()),
+          year: Number.parseInt(data.year.toString()),
+          diameter: data.diameter
+            ? Number.parseFloat(data.diameter.toString())
+            : null,
+          weight: data.weight
+            ? Number.parseFloat(data.weight.toString())
+            : null,
+        }),
+      });
 
       if (!response.ok) throw new Error();
       toast.success("Elément ajouté avec succès");

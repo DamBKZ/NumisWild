@@ -113,16 +113,16 @@ const modifiedData: RequestHandler = async (req, res, next) => {
   const dataSchema = Joi.object({
     lastname: Joi.string()
       .max(50)
-      .required()
+      .optional()
       .pattern(/^[A-Za-zÀ-ÿ\s-]+$/),
     firstname: Joi.string()
       .max(50)
-      .required()
+      .optional()
       .pattern(/^[A-Za-zÀ-ÿ\s-]+$/),
-    email: Joi.string().max(155).required(),
+    email: Joi.string().max(155).optional(),
     new_password: Joi.string()
       .max(255)
-      .required()
+      .optional()
       .pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
       ),
@@ -140,10 +140,9 @@ const readRoleFromToken: RequestHandler = async (req, res, next) => {
     const tokenFromCookies = jwt.decode(req.cookies.auth_token) as PayloadType;
 
     const email: string = tokenFromCookies?.email;
-
     const roleId = await userRepository.readRoleByEmail(email);
 
-    if (roleId !== 1) {
+    if (roleId !== 2) {
       res.json({
         isAdmin: false,
         message: "Accès interdit. Tu n'es pas un admin",
@@ -151,6 +150,23 @@ const readRoleFromToken: RequestHandler = async (req, res, next) => {
     }
 
     res.json({ isAdmin: true, message: "bienvenue admin" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getCurrentUser: RequestHandler = async (req, res, next) => {
+  try {
+    const tokenFromCookies = (await jwt.verify(
+      req.cookies.auth_token,
+      process.env.APP_SECRET as string,
+    )) as PayloadType;
+
+    const email: string = tokenFromCookies.email;
+
+    const user = await userRepository.readByEmail(email);
+
+    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -166,4 +182,5 @@ export default {
   checkEmail,
   destroy,
   readRoleFromToken,
+  getCurrentUser,
 };

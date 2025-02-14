@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Money (
 INSERT INTO role (id,label) VALUES (1, 'user'), (2, 'administrator');
 INSERT INTO User (id, firstname, lastname, email, hash_password, role_id) 
 VALUES 
-(1, 'Jean', 'Bon', 'toto@toto.fr', 'Toto1234!', 1);
+(1, 'Jean', 'Bon', 'toto@toto.fr', '$argon2id$v=19$m=19456,t=2,p=1$ryBqP3iGvpJXQbiGPXj+Ug$W/1+Hrw3lccJ1T2bGMAR6MOzF1dEqMt+a/n/FtFn7Pc', 1);
 
 INSERT INTO Collection (label, description)
 VALUES 

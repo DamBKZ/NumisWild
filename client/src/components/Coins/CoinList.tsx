@@ -12,16 +12,13 @@ export default function CoinList() {
 
   const fetchCoins = useCallback(async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/money`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/money`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+      });
 
       if (!response.ok)
         throw new Error("Erreur lors de la récupération des pièces");
@@ -41,7 +38,7 @@ export default function CoinList() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/money/${id}`,
+        `${import.meta.env.VITE_API_URL}/money/${id}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -75,7 +72,7 @@ export default function CoinList() {
   const handleSaveEdit = async (updatedCoin: Coin) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/money/${updatedCoin.id}`,
+        `${import.meta.env.VITE_API_URL}/money/${updatedCoin.id}`,
         {
           method: "PUT",
           credentials: "include",
