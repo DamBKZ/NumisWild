@@ -1,5 +1,52 @@
 # NumisWild
 
+NumisWild est une application web permettant aux utilisateurs de gérer et de visualiser leur collection
+de pièces de monnaie. Elle offre également des fonctionnalités d'administration pour gérer les
+utilisateurs et les éléments de la collection.
+
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+FONCTIONNALITÉS :
+
+Authentification et gestion des utilisateurs : Les utilisateurs peuvent se connecter, s'inscrire, et
+gérer leurs profils.
+Collection de pièces : Les utilisateurs peuvent ajouter, modifier et afficher les pièces de leur 
+collection.
+Gestion Admin : Les administrateurs peuvent gérer les utilisateurs et avoir accès à des fonctionnalités
+supplémentaires.
+Interface intuitive et responsive : L'interface est conçue pour être utilisée sur différents appareils
+, de l'ordinateur de bureau au mobile.
+
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+UTILISATION:
+
+- Page d'accueil
+
+La page d'accueil présente  un bouton de connexion ou d'inscription. Une fois authentifié, vous accéder
+à une page principale qui regroupe les éléments de votre collection.
+
+- Collection
+
+Sur la page de collection, les utilisateurs peuvent :
+
+1) Ajouter de nouvelles pièces à leur collection.
+2) Modifier des pièces existantes.
+3) Supprimer des pièces de la collection.
+
+- Profil
+
+Les utilisateurs peuvent accéder à leur profil pour modifier leurs informations personnelles et gérer
+leurs paramètres de compte.
+
+
+- Administration
+
+Les administrateurs ont accès à une interface spéciale pour gérer les utilisateurs.
+
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+
 Ce projet est un monorepo JS, suivant l'architecture React-Express-MySQL telle qu'enseignée à la Wild Code School (v7.1.7) :
 
 ```mermaid
